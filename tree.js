@@ -35,7 +35,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const testArr2 = [1, 2, 3, 4, 5, 6, 9, 8, 7];
-const testTree = new Tree(testArr2);
+const testTree = new Tree(testArr);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
