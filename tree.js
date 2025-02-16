@@ -66,6 +66,18 @@ export class Tree {
                         current.left = current.left.right;
                         return;
                     }
+                    if (current.left.left && current.left.right) {
+                        const oldLeft = current.left.left;
+                        let reference = current.left.right;
+                        let nextReference = reference.left;
+                        while (reference && nextReference) {
+                            reference = nextReference;
+                            nextReference = reference.left;
+                        }
+                        current.left = reference;
+                        current.left.left = oldLeft;
+                        return;
+                    }
                 }
                 if (current.right && current.right.value === value) {
                     if (!current.right.left && !current.right.right) {
@@ -78,6 +90,19 @@ export class Tree {
                     }
                     if (!current.right.left && current.right.right) {
                         current.right = current.right.right;
+                        return;
+                    }
+                    if (current.right.left && current.right.right) {
+                        const oldLeft = current.right.left;
+                        let reference = current.right.right;
+                        let nextReference = reference.left;
+                        while (reference && nextReference) {
+                            reference = nextReference;
+                            nextReference = reference.left;
+                        }
+                        current.right = reference;
+                        current.right.left = oldLeft;
+                        return;
                     }
                 }
                 current = current.left;
@@ -95,6 +120,18 @@ export class Tree {
                         current.left = current.left.right;
                         return;
                     }
+                    if (current.right.left && current.right.right) {
+                        const oldLeft = current.left.left;
+                        let reference = current.right.right;
+                        let nextReference = reference.left;
+                        while (reference && nextReference) {
+                            reference = nextReference;
+                            nextReference = reference.left;
+                        }
+                        current.right = reference;
+                        current.right.left = oldLeft;
+                        return;
+                    }
                 }
                 if (current.right && current.right.value === value) {
                     if (!current.right.left && !current.right.right) {
@@ -107,6 +144,18 @@ export class Tree {
                     }
                     if (!current.right.left && current.right.right) {
                         current.right = current.right.right;
+                    }
+                    if (current.right.left && current.right.right) {
+                        const oldLeft = current.right.left;
+                        let reference = current.right.right;
+                        let nextReference = reference.left;
+                        while (reference && nextReference) {
+                            reference = nextReference;
+                            nextReference = reference.left;
+                        }
+                        current.right = reference;
+                        current.right.left = oldLeft;
+                        return;
                     }
                 }
                 current = current.right;
@@ -133,6 +182,6 @@ const testTree = new Tree(testArr);
 testTree.insert(2);
 testTree.insert(21);
 testTree.insert(25);
-testTree.deleteItem(324);
+testTree.deleteItem(67);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
