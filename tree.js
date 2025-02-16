@@ -22,21 +22,20 @@ export class Tree {
 
     insert(value) {
         let current = this.root;
-        if (value === current.value) return;
         while (value !== current.value) {
             if (value < current.value) {
+                if (!current.left) {
+                    current.left = new Node(value);
+                    return;
+                }
                 current = current.left;
-            }
-            if (value > current.value && value > current.right.value) {
+            } else if (value > current.value) {
+                if (!current.right) {
+                    current.right = new Node(value);
+                    return;
+                }
                 current = current.right;
-            }
-            if (value > current.value && value < current.right.value) {
-                console.log("ping");
-                const oldNode = current.right;
-                current.right = new Node(value);
-                current.right.right = oldNode;
-                return;
-            }
+            } else return;
         }
     }
 }
@@ -57,6 +56,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const testTree = new Tree(testArr);
 testTree.insert(2);
-testTree.insert(6);
+testTree.insert(21);
+testTree.insert(25);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
