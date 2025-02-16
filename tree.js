@@ -41,11 +41,29 @@ export class Tree {
 
     deleteItem(value) {
         let current = this.root;
-        while (value !== current.value) {
+        if (value === current.value) {
+            if (current.left && !current.right) {
+                this.root = current.left;
+                return;
+            }
+            if (!current.left && current.right) {
+                this.root = current.right;
+                return;
+            }
+        }
+        while (current && value !== current.value) {
             if (value < current.value) {
                 if (current.left && current.left.value === value) {
                     if (!current.left.left && !current.left.right) {
                         current.left = null;
+                        return;
+                    }
+                    if (current.left.left && !current.left.right) {
+                        current.left = current.left.left;
+                        return;
+                    }
+                    if (!current.left.left && current.left.right) {
+                        current.left = current.left.right;
                         return;
                     }
                 }
@@ -53,6 +71,13 @@ export class Tree {
                     if (!current.right.left && !current.right.right) {
                         current.right = null;
                         return;
+                    }
+                    if (current.right.left && !current.right.right) {
+                        current.right = current.right.left;
+                        return;
+                    }
+                    if (!current.right.left && current.right.right) {
+                        current.right = current.right.right;
                     }
                 }
                 current = current.left;
@@ -62,11 +87,26 @@ export class Tree {
                         current.left = null;
                         return;
                     }
+                    if (current.left.left && !current.left.right) {
+                        current.left = current.left.left;
+                        return;
+                    }
+                    if (!current.left.left && current.left.right) {
+                        current.left = current.left.right;
+                        return;
+                    }
                 }
                 if (current.right && current.right.value === value) {
                     if (!current.right.left && !current.right.right) {
                         current.right = null;
                         return;
+                    }
+                    if (current.right.left && !current.right.right) {
+                        current.right = current.right.left;
+                        return;
+                    }
+                    if (!current.right.left && current.right.right) {
+                        current.right = current.right.right;
                     }
                 }
                 current = current.right;
@@ -93,6 +133,6 @@ const testTree = new Tree(testArr);
 testTree.insert(2);
 testTree.insert(21);
 testTree.insert(25);
-// testTree.deleteItem(25);
+testTree.deleteItem(324);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
