@@ -50,6 +50,25 @@ export class Tree {
                 this.root = current.right;
                 return;
             }
+            if (current.left && current.right) {
+                const oldLeft = current.left;
+                const oldRight = current.right;
+                let reference = current.right;
+                let nextReference = reference.left;
+                while (reference && nextReference) {
+                    reference = nextReference;
+                    nextReference = reference.left;
+                }
+                this.root = reference;
+                this.root.left = oldLeft;
+                let referenceRight = this.root.right;
+                while (referenceRight && referenceRight.right) {
+                    referenceRight = referenceRight.right;
+                }
+                oldRight.left = null;
+                referenceRight.right = oldRight;
+                return;
+            }
         }
         while (current && value !== current.value) {
             if (value < current.value) {
@@ -179,9 +198,9 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const testTree = new Tree(testArr);
-testTree.insert(2);
-testTree.insert(21);
-testTree.insert(25);
-testTree.deleteItem(67);
+// testTree.insert(2);
+// testTree.insert(21);
+// testTree.insert(25);
+// testTree.deleteItem(8);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
