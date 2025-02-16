@@ -39,6 +39,64 @@ export class Tree {
         }
     }
 
+    static #checkIfValueIsLeftOfCurrent(value, node) {
+        const current = node;
+        if (current.left && current.left.value === value) {
+            if (!current.left.left && !current.left.right) {
+                current.left = null;
+                return;
+            }
+            if (current.left.left && !current.left.right) {
+                current.left = current.left.left;
+                return;
+            }
+            if (!current.left.left && current.left.right) {
+                current.left = current.left.right;
+                return;
+            }
+            if (current.left.left && current.left.right) {
+                const oldLeft = current.left.left;
+                let reference = current.left.right;
+                let nextReference = reference.left;
+                while (reference && nextReference) {
+                    reference = nextReference;
+                    nextReference = reference.left;
+                }
+                current.left = reference;
+                current.left.left = oldLeft;
+            }
+        }
+    }
+
+    static #checkIfValueIsRightOfCurrent(value, node) {
+        const current = node;
+        if (current.right && current.right.value === value) {
+            if (!current.right.left && !current.right.right) {
+                current.right = null;
+                return;
+            }
+            if (current.right.left && !current.right.right) {
+                current.right = current.right.left;
+                return;
+            }
+            if (!current.right.left && current.right.right) {
+                current.right = current.right.right;
+                return;
+            }
+            if (current.right.left && current.right.right) {
+                const oldLeft = current.right.left;
+                let reference = current.right.right;
+                let nextReference = reference.left;
+                while (reference && nextReference) {
+                    reference = nextReference;
+                    nextReference = reference.left;
+                }
+                current.right = reference;
+                current.right.left = oldLeft;
+            }
+        }
+    }
+
     deleteItem(value) {
         let current = this.root;
         if (value === current.value) {
@@ -72,111 +130,12 @@ export class Tree {
         }
         while (current && value !== current.value) {
             if (value < current.value) {
-                if (current.left && current.left.value === value) {
-                    if (!current.left.left && !current.left.right) {
-                        current.left = null;
-                        return;
-                    }
-                    if (current.left.left && !current.left.right) {
-                        current.left = current.left.left;
-                        return;
-                    }
-                    if (!current.left.left && current.left.right) {
-                        current.left = current.left.right;
-                        return;
-                    }
-                    if (current.left.left && current.left.right) {
-                        const oldLeft = current.left.left;
-                        let reference = current.left.right;
-                        let nextReference = reference.left;
-                        while (reference && nextReference) {
-                            reference = nextReference;
-                            nextReference = reference.left;
-                        }
-                        current.left = reference;
-                        current.left.left = oldLeft;
-                        return;
-                    }
-                }
-                if (current.right && current.right.value === value) {
-                    if (!current.right.left && !current.right.right) {
-                        current.right = null;
-                        return;
-                    }
-                    if (current.right.left && !current.right.right) {
-                        current.right = current.right.left;
-                        return;
-                    }
-                    if (!current.right.left && current.right.right) {
-                        current.right = current.right.right;
-                        return;
-                    }
-                    if (current.right.left && current.right.right) {
-                        const oldLeft = current.right.left;
-                        let reference = current.right.right;
-                        let nextReference = reference.left;
-                        while (reference && nextReference) {
-                            reference = nextReference;
-                            nextReference = reference.left;
-                        }
-                        current.right = reference;
-                        current.right.left = oldLeft;
-                        return;
-                    }
-                }
+                Tree.#checkIfValueIsLeftOfCurrent(value, current);
+                Tree.#checkIfValueIsRightOfCurrent(value, current);
                 current = current.left;
             } else if (value > current.value) {
-                if (current.left && current.left.value === value) {
-                    if (!current.left.left && !current.left.right) {
-                        current.left = null;
-                        return;
-                    }
-                    if (current.left.left && !current.left.right) {
-                        current.left = current.left.left;
-                        return;
-                    }
-                    if (!current.left.left && current.left.right) {
-                        current.left = current.left.right;
-                        return;
-                    }
-                    if (current.right.left && current.right.right) {
-                        const oldLeft = current.left.left;
-                        let reference = current.right.right;
-                        let nextReference = reference.left;
-                        while (reference && nextReference) {
-                            reference = nextReference;
-                            nextReference = reference.left;
-                        }
-                        current.right = reference;
-                        current.right.left = oldLeft;
-                        return;
-                    }
-                }
-                if (current.right && current.right.value === value) {
-                    if (!current.right.left && !current.right.right) {
-                        current.right = null;
-                        return;
-                    }
-                    if (current.right.left && !current.right.right) {
-                        current.right = current.right.left;
-                        return;
-                    }
-                    if (!current.right.left && current.right.right) {
-                        current.right = current.right.right;
-                    }
-                    if (current.right.left && current.right.right) {
-                        const oldLeft = current.right.left;
-                        let reference = current.right.right;
-                        let nextReference = reference.left;
-                        while (reference && nextReference) {
-                            reference = nextReference;
-                            nextReference = reference.left;
-                        }
-                        current.right = reference;
-                        current.right.left = oldLeft;
-                        return;
-                    }
-                }
+                Tree.#checkIfValueIsLeftOfCurrent(value, current);
+                Tree.#checkIfValueIsRightOfCurrent(value, current);
                 current = current.right;
             } else return;
         }
@@ -200,7 +159,7 @@ const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const testTree = new Tree(testArr);
 // testTree.insert(2);
 // testTree.insert(21);
+testTree.deleteItem(324);
 // testTree.insert(25);
-// testTree.deleteItem(8);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
