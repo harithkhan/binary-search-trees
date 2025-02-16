@@ -1,12 +1,14 @@
 import { Node } from "./node.js";
 
 function buildTree(arr) {
-    arr.sort((a, b) => a - b);
-    if (arr.length === 0) return null;
-    const middleIndex = Math.floor((0 + arr.length - 1) / 2);
-    const middleNode = new Node(arr[middleIndex]);
-    const leftArr = arr.slice(0, middleIndex);
-    const rightArr = arr.slice(middleIndex + 1);
+    const uniqueSet = new Set(arr);
+    const uniqueArr = [...uniqueSet];
+    uniqueArr.sort((a, b) => a - b);
+    if (uniqueArr.length === 0) return null;
+    const middleIndex = Math.floor((0 + uniqueArr.length - 1) / 2);
+    const middleNode = new Node(uniqueArr[middleIndex]);
+    const leftArr = uniqueArr.slice(0, middleIndex);
+    const rightArr = uniqueArr.slice(middleIndex + 1);
     middleNode.left = leftArr.length === 0 ? null : buildTree(leftArr);
     middleNode.right = rightArr.length === 0 ? null : buildTree(rightArr);
     return middleNode;
