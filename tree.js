@@ -97,8 +97,8 @@ export class Tree {
         }
     }
 
-    deleteItem(value) {
-        let current = this.root;
+    static #checkIfRootShouldBeDeleted(value, node) {
+        const current = node;
         if (value === current.value) {
             if (current.left && !current.right) {
                 this.root = current.left;
@@ -125,9 +125,13 @@ export class Tree {
                 }
                 oldRight.left = null;
                 referenceRight.right = oldRight;
-                return;
             }
         }
+    }
+
+    deleteItem(value) {
+        let current = this.root;
+        Tree.#checkIfRootShouldBeDeleted(value, current);
         while (current && value !== current.value) {
             if (value < current.value) {
                 Tree.#checkIfValueIsLeftOfCurrent(value, current);
@@ -159,7 +163,7 @@ const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const testTree = new Tree(testArr);
 // testTree.insert(2);
 // testTree.insert(21);
-testTree.deleteItem(324);
+testTree.deleteItem(8);
 // testTree.insert(25);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
