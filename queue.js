@@ -33,6 +33,10 @@ export class Queue {
             this.head = nextNode;
         }
     }
+
+    isEmpty() {
+        return this.head === true;
+    }
 }
 
 const test = new Queue();
