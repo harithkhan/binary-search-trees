@@ -23,10 +23,24 @@ export class Queue {
             this.tail = newNode;
         }
     }
+
+    dequeue() {
+        if (!this.head.next) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            const nextNode = this.head.next;
+            this.head = nextNode;
+        }
+    }
 }
 
 const test = new Queue();
 test.enqueue(5);
 test.enqueue(6);
-// test.enqueue(7);
+test.enqueue(7);
+test.dequeue();
+test.dequeue();
+test.dequeue();
+
 console.log(JSON.stringify(test, null, 2));
