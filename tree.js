@@ -223,4 +223,21 @@ export class Tree {
         const current = this.root;
         Tree.#preOrderRecursive(current, callBack);
     }
+
+    static #postOrderRecursive(currentNode, callBack) {
+        const current = currentNode;
+        if (!current) return;
+        Tree.#postOrderRecursive(current.left, callBack);
+        Tree.#postOrderRecursive(current.right, callBack);
+        callBack(current);
+    }
+
+    postOrder(callBack) {
+        if (typeof callBack !== "function") {
+            throw new Error("Callback not provided or is not a function");
+        }
+        if (!this.root) return;
+        const current = this.root;
+        Tree.#postOrderRecursive(current, callBack);
+    }
 }
