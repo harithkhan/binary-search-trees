@@ -206,4 +206,21 @@ export class Tree {
         const current = this.root;
         Tree.#inOrderRecursive(current, callBack);
     }
+
+    static #preOrderRecursive(currentNode, callBack) {
+        const current = currentNode;
+        if (!current) return;
+        callBack(current);
+        Tree.#preOrderRecursive(current.left, callBack);
+        Tree.#preOrderRecursive(current.right, callBack);
+    }
+
+    preOrder(callBack) {
+        if (typeof callBack !== "function") {
+            throw new Error("Callback not provided or is not a function");
+        }
+        if (!this.root) return;
+        const current = this.root;
+        Tree.#preOrderRecursive(current, callBack);
+    }
 }

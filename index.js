@@ -11,6 +11,6 @@ function addValueByOne(node) {
     nodeToAdd.value += 1;
 }
 
-testTree.inOrder(addValueByOne);
+testTree.preOrder(addValueByOne);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
