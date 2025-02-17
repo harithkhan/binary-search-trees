@@ -144,6 +144,19 @@ export class Tree {
             } else return;
         }
     }
+
+    find(value) {
+        let current = this.root;
+        while (value !== current.value) {
+            if (value < current.value) {
+                current = current.left;
+            }
+            if (value > current.value) {
+                current = current.right;
+            }
+        }
+        return current;
+    }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -161,9 +174,8 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const testTree = new Tree(testArr);
-// testTree.insert(2);
-// testTree.insert(21);
-testTree.deleteItem(8);
-// testTree.insert(25);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
+const findTester = testTree.find(4);
+console.log(JSON.stringify(findTester, null, 2));
+prettyPrint(findTester);
