@@ -158,24 +158,3 @@ export class Tree {
         return current;
     }
 }
-
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-    if (node === null) {
-        return;
-    }
-    if (node.right !== null) {
-        prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-    }
-    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
-    if (node.left !== null) {
-        prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-    }
-};
-
-const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const testTree = new Tree(testArr);
-console.log(JSON.stringify(testTree, null, 2));
-prettyPrint(testTree.root);
-const findTester = testTree.find(4);
-console.log(JSON.stringify(findTester, null, 2));
-prettyPrint(findTester);
