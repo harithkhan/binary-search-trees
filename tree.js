@@ -173,6 +173,9 @@ export class Tree {
     }
 
     levelOrder(callBack) {
+        if (typeof callBack !== 'function') { 
+            throw new Error("Callback not provided or is not a function");
+        }
         if (!this.root) return;
         const queue = [];
         queue.push(this.root);
