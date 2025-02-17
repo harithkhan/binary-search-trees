@@ -191,20 +191,11 @@ export class Tree {
     }
 
     static #inOrderRecursive(currentNode, callBack) {
-        let current = currentNode;
-        if (!current.left && !current.right) {
-            callBack(current);
-            return;
-        }
-        if (current.left) {
-            current = current.left;
-            Tree.#inOrderRecursive(current, callBack);
-        }
-        if (current.right) {
-            callBack(current);
-            current = current.right;
-            Tree.#inOrderRecursive(current, callBack);
-        }
+        const current = currentNode;
+        if (!current) return;
+        Tree.#inOrderRecursive(current.left, callBack);
+        callBack(current);
+        Tree.#inOrderRecursive(current.right, callBack);
     }
 
     inOrder(callBack) {
