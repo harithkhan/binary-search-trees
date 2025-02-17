@@ -189,4 +189,30 @@ export class Tree {
         queue.push(this.root);
         Tree.#levelOrderRecursive(queue, callBack);
     }
+
+    static #inOrderRecursive(currentNode, callBack) {
+        let current = currentNode;
+        if (!current.left && !current.right) {
+            callBack(current);
+            return;
+        }
+        if (current.left) {
+            current = current.left;
+            Tree.#inOrderRecursive(current, callBack);
+        }
+        if (current.right) {
+            callBack(current);
+            current = current.right;
+            Tree.#inOrderRecursive(current, callBack);
+        }
+    }
+
+    inOrder(callBack) {
+        if (typeof callBack !== "function") {
+            throw new Error("Callback not provided or is not a function");
+        }
+        if (!this.root) return;
+        const current = this.root;
+        Tree.#inOrderRecursive(current, callBack);
+    }
 }
