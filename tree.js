@@ -157,4 +157,29 @@ export class Tree {
         }
         return current;
     }
+
+    static #serveQueue(queue, callBack) {
+        callBack(queue[0]);
+        queue.shift();
+    }
+
+    static #queueChildren(currentNode, queue) {
+        if (currentNode && currentNode.left) {
+            queue.push(currentNode.left);
+        }
+        if (currentNode && currentNode.right) {
+            queue.push(currentNode.right);
+        }
+    }
+
+    levelOrder(callBack) {
+        if (!this.root) return;
+        const queue = [];
+        queue.push(this.root);
+        while (queue[0]) {
+            const current = queue[0];
+            Tree.#serveQueue(queue, callBack);
+            Tree.#queueChildren(current, queue);
+        }
+    }
 }
