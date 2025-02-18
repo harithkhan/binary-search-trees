@@ -6,11 +6,7 @@ const testTree = new Tree(testArr);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
 
-function addValueByOne(node) {
-    const nodeToAdd = node;
-    nodeToAdd.value += 1;
-}
-
-testTree.postOrder(addValueByOne);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
+const height = Tree.height(testTree.root);
+console.log(height);

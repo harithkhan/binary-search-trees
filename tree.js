@@ -240,4 +240,11 @@ export class Tree {
         const current = this.root;
         Tree.#postOrderRecursive(current, callBack);
     }
+
+    static height(node) {
+        if (!node) {
+            return -1;
+        }
+        return 1 + Math.max(Tree.height(node.left), Tree.height(node.right));
+    }
 }
