@@ -248,20 +248,26 @@ export class Tree {
         return 1 + Math.max(this.height(node.left), this.height(node.right));
     }
 
-    findParent(node, rootNode) {
+    #findParent(node, rootNode) {
         if (!rootNode) {
             return null;
         }
         if (node === rootNode.left || node === rootNode.right) {
             return rootNode;
         }
-        const leftSearch = this.findParent(node, rootNode.left);
+        const leftSearch = this.#findParent(node, rootNode.left);
         if (leftSearch) return leftSearch;
-        return this.findParent(node, rootNode.right);
+        return this.#findParent(node, rootNode.right);
     }
 
     depth(node) {
-        const rootNode = this.root;
-
+        if (!node || node === this.root) {
+            return 0;
+        }
+        const parentNode = this.#findParent(node, this.root);
+        if (!parentNode) {
+            return 0;
+        }
+        return 1 + this.depth(parentNode);
     }
 }
