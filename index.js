@@ -17,16 +17,16 @@ console.log(`\n2. Confirm that the tree is balanced by calling isBalanced.`);
 console.log(`${testTree.isBalanced()}`);
 
 console.log(`\n3. Print out all elements in level, pre, post, and in order.`);
-const leverOrderArr = [];
+let leverOrderArr = [];
 testTree.levelOrder((node) => leverOrderArr.push(node.value));
 console.log(`Level Order: ${leverOrderArr}`);
-const preOrderArr = [];
+let preOrderArr = [];
 testTree.preOrder((node) => preOrderArr.push(node.value));
 console.log(`Pre Order: ${preOrderArr}`);
-const postOrderArr = [];
+let postOrderArr = [];
 testTree.postOrder((node) => postOrderArr.push(node.value));
 console.log(`Post Order: ${postOrderArr}`);
-const inOrderArr = [];
+let inOrderArr = [];
 testTree.inOrder((node) => inOrderArr.push(node.value));
 console.log(`In Order: ${inOrderArr}`);
 
@@ -47,3 +47,18 @@ testTree.rebalance();
 
 console.log(`\n7. Confirm that the tree is balanced by calling isBalanced.`);
 console.log(`${testTree.isBalanced()}`);
+prettyPrint(testTree.root);
+
+console.log(`\n8. Print out all elements in level, pre, post, and in order.`);
+leverOrderArr = [];
+testTree.levelOrder((node) => leverOrderArr.push(node.value));
+console.log(`Level Order: ${leverOrderArr}`);
+preOrderArr = [];
+testTree.preOrder((node) => preOrderArr.push(node.value));
+console.log(`Pre Order: ${preOrderArr}`);
+postOrderArr = [];
+testTree.postOrder((node) => postOrderArr.push(node.value));
+console.log(`Post Order: ${postOrderArr}`);
+inOrderArr = [];
+testTree.inOrder((node) => inOrderArr.push(node.value));
+console.log(`In Order: ${inOrderArr}`);
