@@ -241,10 +241,10 @@ export class Tree {
         Tree.#postOrderRecursive(current, callBack);
     }
 
-    static height(node) {
+    height(node) {
         if (!node) {
             return -1;
         }
-        return 1 + Math.max(Tree.height(node.left), Tree.height(node.right));
+        return 1 + Math.max(this.height(node.left), this.height(node.right));
     }
 }

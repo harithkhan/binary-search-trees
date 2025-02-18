@@ -6,7 +6,4 @@ const testTree = new Tree(testArr);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
 
-console.log(JSON.stringify(testTree, null, 2));
-prettyPrint(testTree.root);
-const height = Tree.height(testTree.root);
-console.log(height);
+console.log(testTree.height(testTree.root));
