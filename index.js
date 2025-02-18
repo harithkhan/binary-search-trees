@@ -11,3 +11,6 @@ testTree.insert(22);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
 console.log(testTree.isBalanced());
+testTree.rebalance();
+console.log(JSON.stringify(testTree, null, 2));
+prettyPrint(testTree.root);

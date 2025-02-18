@@ -283,4 +283,12 @@ export class Tree {
     isBalanced() {
         return this.#checkNodeBalanced(this.root) !== -1;
     }
+
+    rebalance() {
+        const newArray = [];
+        this.inOrder((node) => {
+            newArray.push(node.value);
+        });
+        this.root = buildTree(newArray);
+    }
 }
