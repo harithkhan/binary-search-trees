@@ -29,3 +29,12 @@ console.log(`Post Order: ${postOrderArr}`);
 const inOrderArr = [];
 testTree.inOrder((node) => inOrderArr.push(node.value));
 console.log(`In Order: ${inOrderArr}`);
+
+console.log(`\n4. Unbalance the tree by adding several numbers > 100.`);
+testTree.insert(101);
+testTree.insert(102);
+testTree.insert(103);
+testTree.insert(104);
+testTree.insert(105);
+testTree.insert(106);
+prettyPrint(testTree.root);
