@@ -38,3 +38,6 @@ testTree.insert(104);
 testTree.insert(105);
 testTree.insert(106);
 prettyPrint(testTree.root);
+
+console.log(`\n5. Confirm that the tree is unbalanced by calling isBalanced.`);
+console.log(`${testTree.isBalanced()}`);
