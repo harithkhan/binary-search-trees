@@ -41,3 +41,6 @@ prettyPrint(testTree.root);
 
 console.log(`\n5. Confirm that the tree is unbalanced by calling isBalanced.`);
 console.log(`${testTree.isBalanced()}`);
+
+console.log(`\n6. Balance the tree by calling rebalance.`);
+testTree.rebalance();
