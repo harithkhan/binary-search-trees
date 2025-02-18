@@ -6,5 +6,8 @@ const testTree = new Tree(testArr);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
 
-const testNode = testTree.root.right.left.right;
-console.log(testTree.depth(testNode));
+testTree.insert(21);
+testTree.insert(22);
+console.log(JSON.stringify(testTree, null, 2));
+prettyPrint(testTree.root);
+console.log(testTree.isBalanced());
