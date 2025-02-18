@@ -1,17 +1,13 @@
 import { Node } from "./node.js";
 
 function buildTree(arr) {
-    const uniqueSet = new Set(arr);
-    const uniqueArr = [...uniqueSet];
-    uniqueArr.sort((a, b) => a - b);
+    const uniqueArr = [...new Set(arr)].sort((a, b) => a - b);
     if (uniqueArr.length === 0) return null;
-    const middleIndex = Math.floor((0 + uniqueArr.length - 1) / 2);
-    const middleNode = new Node(uniqueArr[middleIndex]);
-    const leftArr = uniqueArr.slice(0, middleIndex);
-    const rightArr = uniqueArr.slice(middleIndex + 1);
-    middleNode.left = leftArr.length === 0 ? null : buildTree(leftArr);
-    middleNode.right = rightArr.length === 0 ? null : buildTree(rightArr);
-    return middleNode;
+    const middleIndex = Math.floor(uniqueArr.length / 2);
+    const root = new Node(uniqueArr[middleIndex]);
+    root.left = buildTree(uniqueArr.slice(0, middleIndex));
+    root.right = buildTree(uniqueArr.slice(middleIndex + 1));
+    return root;
 }
 
 export class Tree {
