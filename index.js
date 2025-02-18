@@ -6,4 +6,5 @@ const testTree = new Tree(testArr);
 console.log(JSON.stringify(testTree, null, 2));
 prettyPrint(testTree.root);
 
-console.log(testTree.height(testTree.root));
+const testNode = testTree.root.left.left;
+console.log(testTree.findParent(testNode, testTree.root));
