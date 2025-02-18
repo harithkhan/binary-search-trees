@@ -44,3 +44,6 @@ console.log(`${testTree.isBalanced()}`);
 
 console.log(`\n6. Balance the tree by calling rebalance.`);
 testTree.rebalance();
+
+console.log(`\n7. Confirm that the tree is balanced by calling isBalanced.`);
+console.log(`${testTree.isBalanced()}`);
